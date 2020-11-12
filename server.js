@@ -263,7 +263,7 @@ function validateSchedule (obj){
 }
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Frontend+Backend functionalities 
@@ -502,26 +502,12 @@ function addClasses(){
 })
 
 
-// sendHttpRequest('PUT','http://localhost:5000/api/timetable/schedule/'+ valScheduleName, sendData).then(responseData => { // calling function to execute the htttp request
-//     console.log(responseData);
-    
 
-// // alert("Here are your results:" + "\n" + responseData[0].className);
-//  }) .catch(err => {
-//   console.log(err);
-// })
 
 
 } //function add classes ends here
 
 
-function addItem(val){
-    var ul = document.getElementById("dynamic-list");
-    var candidate = val;
-    var li = document.createElement("li");
-     li.setAttribute('id',candidate[0].subjectCode);
-    li.appendChild(document.createTextNode(candidate[0].subjectCode + candidate[0].courseCode));
-    ul.appendChild(li);
-}
+
 
     
