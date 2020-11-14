@@ -17,4 +17,10 @@ export class AppComponent {
      console.log(response);
    });
   }
+
+  createScheduleName(){
+    this.timeTableService.createScheduleName('arsh123').subscribe((response: any)=>{
+    console.log(response);
+    });
+  }
 }

@@ -1,0 +1,45 @@
+<!-- USER input boxes-->
+
+<h2> {{title}}</h2>
+
+<div>
+    <label>Subject Name: </label>
+    <input [(ngModel)] = "subject" type="text" class = "searchBox" placeholder="Enter Subject Name">
+
+<!--ngModel is a directive which binds input, select and textarea, 
+    and stores the required user value in a variable and we can use that variable whenever we require that value.-->
+
+    <label>Course Code: </label>
+    <input [(ngModel)] = "course" type="text" class = "searchBox" placeholder="Enter Course Code">
+
+    <label>Component: </label>
+    <input [(ngModel)] = "component" type="text" class = "searchBox" placeholder="Enter Course Component">
+
+    <button (click) = "searchResults()">Submit!</button>
+
+</div>
+
+<h3>Here are your Results!</h3>
+<table>
+    <tr>
+      <th>Subject</th>
+      <th>Course Code</th>
+      <th>Component</th>
+    </tr>
+    <tr *ngFor = "let x of result">
+      <td>{{x.subject}}</td>
+      <td>{{x.catalog_nbr}}</td>
+      <td>{{x.course_info[0].ssr_component}}</td>
+      <td>
+          <button (click)= "addToSchedule()">Add this course to Schedule!</button>
+      </td>
+    </tr>
+    
+  </table>
+
+
+
+
+
+
+

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +20,28 @@ export class HttpRequestService {
    // will return observable of this type
    get(uri: string){
      // route structure 
-     return this.http.get(`${this.ROOT_URL}/${uri}`); 
+     try{
+       return this.http.get(`${this.ROOT_URL}/${uri}`); 
+    }
+    catch(error){
+      this.errorHandler(error);
+    }
+     
    }
 
    post(uri: string, payload: Object){
      return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
    }
 
+   delete(uri: string){
+     return this.http.delete(`${this.ROOT_URL}/${uri}`);
+   }
+
+   put(uri: string, body: Object){
+     return this.http.put(`${this.ROOT_URL}/${uri}`, body);
+   }
+   errorHandler(error: HttpErrorResponse){
+  return Observable.throw(error.message || "Server Error");
+  }
 
 }
