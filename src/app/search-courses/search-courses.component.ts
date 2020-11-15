@@ -17,6 +17,7 @@ export class SearchCoursesComponent implements OnInit {
   indexCourse;
   indexSchedule;
   scheduleName;
+  courseInSchedule;
 
 
   public errorMessage;
@@ -50,7 +51,6 @@ export class SearchCoursesComponent implements OnInit {
     else if(this.subject === "" && this.course === ""){
       this.timeTableService.getResultOnlyComponent(this.component).subscribe(response=>{
         this.result=response;
-        console.log(this.result);
       }, error=> {
         this.errorMessage=error.error
         alert(this.errorMessage);
@@ -76,16 +76,16 @@ export class SearchCoursesComponent implements OnInit {
 
   addToSchedule(indexPar){
     // if user tries to add a course to a schedule without creating a schedule 
-    console.log(indexPar);
     this.indexCourse = indexPar; 
     
     this.timeTableService.getSchedules().subscribe(response=>{
       this.schedule = response;
       if(this.schedule.length == 0){
         alert("No schedule has been created! Please create a schedule first to add courses!");
+      }else{
+        alert("Please select a schedule from the list in which you would like to add this course or create a new schedule");
       }
-      alert("Please select a schedule from the list in which you would like to add this course or create a new schedule");
-      console.log(response);
+      
       },error => {
         this.errorMessage=error.error;
         alert(this.errorMessage);
@@ -102,15 +102,19 @@ export class SearchCoursesComponent implements OnInit {
   
 
   this.timeTableService.addCourseToSchedule(this.scheduleName, this.subject, this.course).subscribe(response=>{
-    console.log(response);
-
+    this.courseInSchedule = response;
+    //this.displayTimetable(this.courseInSchedule);
+    console.log(this.courseInSchedule);
   }, error=>{
     this.errorMessage=error.error;
     alert(this.errorMessage);
 
   });
+  
 
    }
+// creates a new array of object by getting the timetable entry for each subject_course pair
+  
 
 
 

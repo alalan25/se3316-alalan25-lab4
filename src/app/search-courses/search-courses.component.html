@@ -27,7 +27,6 @@
     </ul>
 </div>
 
-
 <h3>Here are your Results!</h3>
 <table>
     <tr>
@@ -48,6 +47,26 @@
     </tr>
     
   </table>
+
+  <h3>Your Timetable for schedule {{ scheduleName}}: </h3>
+  <table>
+    <tr>
+       <th>index</th>
+      <th>Subject</th>
+      <th>Course Code</th>
+    </tr>
+    <tr *ngFor = "let c of courseInSchedule; let i = index">
+      <td>{{i}}</td>
+      <td>{{c.subjectCode}}</td>
+      <td>{{c.courseCode}}</td>
+     
+    </tr>
+    
+  </table>
+
+
+
+
 
 
 
