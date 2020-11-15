@@ -21,6 +21,7 @@ export class SearchCoursesComponent implements OnInit {
   timetableArray = [];
 
 
+
   public errorMessage;
 
   result: any;
@@ -130,10 +131,28 @@ export class SearchCoursesComponent implements OnInit {
       });
 
      }
-     
-
 
    }
+
+     // function to delete schedule 
+     deleteSchedule(input){
+       // index at which we want to delete 
+      this.indexSchedule = input; 
+      this.scheduleName = this.schedule[this.indexSchedule].schedule_name;
+      // calling the service that calls the delete request and returns an observable 
+      this.timeTableService.deleteScheduleWithAGivenName(this.scheduleName).subscribe(response=>{
+      this.schedule = response;
+
+      },error=>{
+        this.errorMessage=error.error;
+        alert(this.errorMessage);
+
+      });
+
+      
+      
+
+    }
 
 
 

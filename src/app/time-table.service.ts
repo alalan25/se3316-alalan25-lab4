@@ -46,6 +46,12 @@ createScheduleName(name: string){
   return this.request.post('api/timetable/schedule',{"schedule_name": name} ); 
 }
 
+deleteScheduleWithAGivenName(name: string){
+
+  return this.request.delete('api/timetable/schedule/'+name);
+
+}
+
 // gets an array of all the schedules
 getSchedules(){
 return this.request.get('api/schedule');

@@ -19,11 +19,12 @@
 
 </div>
 
-<h2>Schedules:</h2>
+<h3>Here is a list of your Schedules. Press on the schedule name to create a course list, or press on delete button to delete the schedule:</h3>
 
 <div>
     <ul *ngFor = "let s of schedule; let i = index">
-        <li><button (click) = "addClass(i)">{{s.schedule_name}}</button></li>   
+        <li><button (click) = "addClass(i)">{{s.schedule_name}}</button></li>  
+        <li><button (click)= "deleteSchedule(i)">Delete!</button></li> 
     </ul>
 </div>
 

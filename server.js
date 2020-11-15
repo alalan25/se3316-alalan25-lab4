@@ -217,7 +217,7 @@ app.delete('/api/timetable/schedule/:scheduleName', (req, res) => {
     schedule.splice(index,1); // go to this index inside the array and remove one object 
 
     // return the deleted schedule 
-    res.send(name);
+    res.send(schedule);
     
     });
 
