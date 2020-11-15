@@ -150,7 +150,7 @@ if(schedule.find(s=> s.schedule_name === req.body.schedule_name)){ // if schedul
 });
 
 
-
+// adding course to schedule
 app.put('/api/timetable/schedule/:scheduleName', (req, res) => { //taking schedule name as params
 
      console.log(req.body);
@@ -172,7 +172,7 @@ app.put('/api/timetable/schedule/:scheduleName', (req, res) => { //taking schedu
     //schedule[index].items = req.body.items; // replaces the list attribute with the new values inputted by user via request body 
     schedule[index].items.push(req.body.items); 
     // return the updated schedule
-    res.send(JSON.stringify(schedule[index].items[0])); 
+    res.send(schedule[index].items); 
 
     });
 
@@ -256,7 +256,7 @@ app.listen(port, ()=> console.log(`Listening on port ${port}!`));
 function validateSchedule (obj){
     const schema = {
         "schedule_name": Joi.string().required(), // the property 'schedule_name' should be string and is required
-        "items": Joi.array().optional() // the property items must be an array and is optional
+        "items": Joi.optional() // the property items must be an array and is optional
     };
     return Joi.validate(obj, schema); // validate the request body with schema 
     

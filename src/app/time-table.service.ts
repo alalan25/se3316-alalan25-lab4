@@ -46,6 +46,22 @@ getSchedules(){
 return this.request.get('api/schedule');
 }
 
+addCourseToSchedule(schName: string, sub: string, course:string){
+  return this.request.put('api/timetable/schedule/'+schName, {
+    "schedule_name": schName,
+                
+                "items":
+                
+                   {
+                    "subjectCode": sub,
+                    "courseCode": course
+                   }
+                   
+                
+});
+
+}
+
 
 
 }

@@ -22,10 +22,8 @@
 <h2>Schedules:</h2>
 
 <div>
-    <ul *ngFor = "let s of schedule">
-        <li><button>{{s.schedule_name}}</button></li>
-        
-       
+    <ul *ngFor = "let s of schedule; let i = index">
+        <li><button (click) = "addClass(i)">{{s.schedule_name}}</button></li>   
     </ul>
 </div>
 
@@ -33,16 +31,19 @@
 <h3>Here are your Results!</h3>
 <table>
     <tr>
+       <th>index</th>
       <th>Subject</th>
       <th>Course Code</th>
       <th>Component</th>
     </tr>
-    <tr *ngFor = "let x of result">
+    <tr *ngFor = "let x of result; let i = index">
+      <td>{{i}}</td>
       <td>{{x.subject}}</td>
       <td>{{x.catalog_nbr}}</td>
       <td>{{x.course_info[0].ssr_component}}</td>
       <td>
-          <button (click)= "addToSchedule()">Add this course to Schedule!</button>
+          <!-- Call the function by passing the index of the row for which the button was clicked-->
+          <button (click)= "addToSchedule(i)" value = "Edit">Add this course to Schedule!</button>
       </td>
     </tr>
     
