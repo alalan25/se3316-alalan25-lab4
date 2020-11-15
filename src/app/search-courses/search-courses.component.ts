@@ -13,7 +13,7 @@ export class SearchCoursesComponent implements OnInit {
   subject = ''; // this will be populated by user input 
   course = '';
   component ='';
-  schedule = [];
+  schedule;
 
   public errorMessage;
 
@@ -52,14 +52,14 @@ export class SearchCoursesComponent implements OnInit {
     // subject+course code
     else if(this.component===""){
       this.timeTableService.getResultOnlySubjectAndCourse(this.subject,this.course).subscribe(response=>this.result=response, error=> {
-        this.errorMessage=error.error
+        this.errorMessage=error.error;
         alert(this.errorMessage);
        });
     }
     // all the three inputs inputted by user
     else {
     this.timeTableService.getResult(this.subject,this.course,this.component).subscribe(response=>this.result=response, error=> {
-      this.errorMessage=error.error
+      this.errorMessage=error.error;
       alert(this.errorMessage);
      });
     }
@@ -69,9 +69,19 @@ export class SearchCoursesComponent implements OnInit {
 
   addToSchedule(){
     // if user tries to add a course to a schedule without creating a schedule 
-    if(this.schedule=[]){
-      alert("No schedule has been created! Please create a schedule first to add courses!");
-    }
+    this.timeTableService.getSchedules().subscribe(response=>{
+      this.schedule = response;
+      if(this.schedule.length == 0){
+        alert("No schedule has been created! Please create a schedule first to add courses!");
+      }
+      alert("Please select a schedule from the list in which you would like to add this course");
+      console.log(response);
+      },error => {
+        this.errorMessage=error.error;
+        alert(this.errorMessage);
+      });
+
+   
   }
 
 
