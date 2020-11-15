@@ -19,6 +19,8 @@ export class SearchCoursesComponent implements OnInit {
   scheduleName;
   courseInSchedule;
   timetableArray = [];
+  letters = /^[A-Za-z]+$/;
+  letterNumber = /^[0-9a-zA-Z]+$/;
 
 
 
@@ -31,11 +33,15 @@ export class SearchCoursesComponent implements OnInit {
   ngOnInit(): void {}
 
  searchResults(){
+
+
      //function that subscribes to the time table service and gets use the response after making the http request 
      //Error handlers added
+     if((this.subject.match(this.letters)) && (this.course.match(this.letterNumber)) || (this.component.match(this.letters))){
+    console.log("valid inputs");
 
      //only subject
-    if(this.course === "" && this.component === ""){
+     if(this.course === "" && this.component === ""){
       this.timeTableService.getResultOnlySubject(this.subject).subscribe(response=>this.result=response, error=> {
        this.errorMessage=error.error
        alert(this.errorMessage);
@@ -44,19 +50,11 @@ export class SearchCoursesComponent implements OnInit {
     } 
     //only course code
     else if(this.subject === "" && this.component === ""){
-      this.timeTableService.getResultOnlyCourse(this.course).subscribe(response=>this.result=response, error=> {
-        this.errorMessage=error.error
-        alert(this.errorMessage);
-       });
+      alert("Error! An input value for the subject is required!");
     }
     // only component 
     else if(this.subject === "" && this.course === ""){
-      this.timeTableService.getResultOnlyComponent(this.component).subscribe(response=>{
-        this.result=response;
-      }, error=> {
-        this.errorMessage=error.error
-        alert(this.errorMessage);
-       });
+      alert(" Error! An input value for the subject and course is required!");
     }
     // subject+course code
     else if(this.component===""){
@@ -72,6 +70,12 @@ export class SearchCoursesComponent implements OnInit {
       alert(this.errorMessage);
      });
     }
+
+     }
+     else{
+      alert("Invalid input! Please input alphabets only!");
+     }
+    
  
   }
 
@@ -101,7 +105,7 @@ export class SearchCoursesComponent implements OnInit {
    this.scheduleName = this.schedule[this.indexSchedule].schedule_name;
    this.subject = this.result[this.indexCourse].subject;
    this.course = this.result[this.indexCourse].catalog_nbr;
-  
+
 
   this.timeTableService.addCourseToSchedule(this.scheduleName, this.subject, this.course).subscribe(response=>{
     this.courseInSchedule = response;
@@ -149,10 +153,9 @@ export class SearchCoursesComponent implements OnInit {
 
       });
 
-      
-      
+       }
 
-    }
+       
 
 
 

@@ -108,26 +108,7 @@ app.get('/api/timetable/subject/:subjectCode', (req, res) => { //takes subjectco
 
 });
 
-// if user only inputs course code
-app.get('/api/timetable/coursecode/:courseCode', (req, res) => { //takes coursecode as a parameter
-    const afterCourseCode = timetable_data.filter(s=> s.catalog_nbr.toString() === req.params.courseCode.toUpperCase()); // filters the array of objects based on the input subject code
-    if(afterCourseCode.length == 0 ){ // if subject code does not exist then return error
-    return res.status(404).send('Error Occured! Double check your inputs and please try again!');
-    }
-    res.send(afterCourseCode);// send back to client
 
-});
-
-// if user only inputs component
-app.get('/api/timetable/component/:courseComponent', (req, res) => { //takes subjectcode as a parameter
-    const afterCourseComponent = timetable_data.filter(s=> s.course_info[0].ssr_component === req.params.courseComponent.toUpperCase());
-    
-    if(afterCourseComponent.length == 0 ){ // if subject code does not exist then return error
-    return res.status(404).send('Error Occured! No such result found! Double check your inputs and please try again!');
-    }
-    res.send(afterCourseComponent);
-
-});
 
 
 
@@ -178,6 +159,8 @@ app.put('/api/timetable/schedule/:scheduleName', (req, res) => { //taking schedu
        return res.status(400).send(error.details[0].message); // list errors
         
     }
+
+    
    
     //Update schedule
     const index = schedule.indexOf(name); // gets the index of the schdeule that we want to update
@@ -185,8 +168,11 @@ app.put('/api/timetable/schedule/:scheduleName', (req, res) => { //taking schedu
     schedule[index].items.push(req.body.items); 
     // return the updated schedule
     res.send(schedule[index].items); 
+    
 
-    });
+   });
+
+
 
 // gets a list of subject code and course code pairs
 app.get('/api/timetable/schedule/:scheduleName', (req, res) => { 

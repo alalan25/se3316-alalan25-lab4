@@ -25,12 +25,7 @@ getResultOnlySubject(subject: string){
   return this.request.get('api/timetable/subject/'+subject);
 }
 
-getResultOnlyCourse(course: string){
-  return this.request.get('api/timetable/coursecode/'+course);
-}
-getResultOnlyComponent(component: string){
-  return this.request.get('api/timetable/component/'+component);
-}
+
 
 getResultOnlySubjectAndCourse(subject: string, course: string){
   return this.request.get('api/timetable/search/subject/coursecode/'+subject+'/'+course);
