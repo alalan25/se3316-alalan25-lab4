@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SearchCoursesComponent } from './search-courses/search-courses.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchCoursesComponent
+    SearchCoursesComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,

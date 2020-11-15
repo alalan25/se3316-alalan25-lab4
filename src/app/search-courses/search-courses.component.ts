@@ -72,8 +72,6 @@ export class SearchCoursesComponent implements OnInit {
     if(this.schedule=[]){
       alert("No schedule has been created! Please create a schedule first to add courses!");
     }
-
-
   }
 
 
