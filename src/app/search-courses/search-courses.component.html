@@ -54,11 +54,24 @@
        <th>index</th>
       <th>Subject</th>
       <th>Course Code</th>
+      <th>Component</th>
+      <th>Class Name</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Days</th>
+      <th>Campus</th>
+      
     </tr>
-    <tr *ngFor = "let c of courseInSchedule; let i = index">
+    <tr *ngFor = "let c of timetableArray; let i = index">
       <td>{{i}}</td>
-      <td>{{c.subjectCode}}</td>
-      <td>{{c.courseCode}}</td>
+      <td>{{c.subject}}</td>
+      <td>{{c.catalog_nbr}}</td>
+      <td>{{c.course_info[0].ssr_component}}</td>
+      <td>{{c.className}}</td>
+      <td>{{c.course_info[0].start_time}}</td>
+      <td>{{c.course_info[0].end_time}}</td>
+      <td>{{c.course_info[0].days}}</td>
+      <td>{{c.course_info[0].campus}}</td>
      
     </tr>
     

@@ -86,6 +86,17 @@ app.get('/api/timetable/search/subject/coursecode/:subjectCode/:courseCode', (re
     res.send(afterCourseCode);
 
 });
+// returns only the object instead of array of objects 
+app.get('/api/timetable/onlyObject/subject/coursecode/:subjectCode/:courseCode', (req, res) => { //takes 3 parameters
+    const afterSubjectCode = timetable_data.filter(s=> s.subject === req.params.subjectCode.toUpperCase()); // filters the array of objects based on the input subject code
+    const afterCourseCode = afterSubjectCode.filter(s=> s.catalog_nbr.toString() === req.params.courseCode.toUpperCase()); //filters the filtered array based on the course code
+    
+    if(afterSubjectCode.length == 0 || afterCourseCode.length == 0 ){ // if subject code or course code does not exist then return error
+    return res.status(404).send('Error Occured! Double check your inputs and please try again!');
+    }
+    res.send(afterCourseCode[0]);
+
+});
 
 // if user only inputs Subject Code
 app.get('/api/timetable/subject/:subjectCode', (req, res) => { //takes subjectcode as a parameter
@@ -117,6 +128,7 @@ app.get('/api/timetable/component/:courseComponent', (req, res) => { //takes sub
     res.send(afterCourseComponent);
 
 });
+
 
 
 //POST for schedule

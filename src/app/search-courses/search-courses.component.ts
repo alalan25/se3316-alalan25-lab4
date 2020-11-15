@@ -18,6 +18,7 @@ export class SearchCoursesComponent implements OnInit {
   indexSchedule;
   scheduleName;
   courseInSchedule;
+  timetableArray = [];
 
 
   public errorMessage;
@@ -103,7 +104,7 @@ export class SearchCoursesComponent implements OnInit {
 
   this.timeTableService.addCourseToSchedule(this.scheduleName, this.subject, this.course).subscribe(response=>{
     this.courseInSchedule = response;
-    //this.displayTimetable(this.courseInSchedule);
+    this.displayTimetable(this.courseInSchedule);
     console.log(this.courseInSchedule);
   }, error=>{
     this.errorMessage=error.error;
@@ -114,7 +115,25 @@ export class SearchCoursesComponent implements OnInit {
 
    }
 // creates a new array of object by getting the timetable entry for each subject_course pair
-  
+   displayTimetable(courseList){
+     for(let x=0; x<courseList.length; x++){
+       this.subject = courseList[x].subjectCode;
+       this.course = courseList[x].courseCode;
+
+       this.timetableArray = [];
+      this.timeTableService.getResultOnlyObject(this.subject, this.course).subscribe(response=>{
+        // adding objects to the timetableArray and dyanmically displaying it 
+       this.timetableArray.push(response);
+      }, error=>{
+        this.errorMessage=error.error;
+        alert(this.errorMessage);
+      });
+
+     }
+     
+
+
+   }
 
 
 

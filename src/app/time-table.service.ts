@@ -36,6 +36,11 @@ getResultOnlySubjectAndCourse(subject: string, course: string){
   return this.request.get('api/timetable/search/subject/coursecode/'+subject+'/'+course);
 }
 
+
+getResultOnlyObject(subject: string, course: string){
+  return this.request.get('api/timetable/onlyObject/subject/coursecode/'+subject+'/'+course);
+}
+
 createScheduleName(name: string){
   //calling the post request by passing the route and req body as parameters 
   return this.request.post('api/timetable/schedule',{"schedule_name": name} ); 
