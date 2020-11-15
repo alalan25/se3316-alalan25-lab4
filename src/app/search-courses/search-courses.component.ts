@@ -37,15 +37,13 @@ export class SearchCoursesComponent implements OnInit {
 
      //function that subscribes to the time table service and gets use the response after making the http request 
      //Error handlers added
-     if((this.subject.match(this.letters)) && (this.course.match(this.letterNumber)) || (this.component.match(this.letters))){
+     //user input could either be alphabet, numbers(for courses) or an empty string
+     if((this.subject.match(this.letters)|| this.subject == "") && (this.course.match(this.letterNumber)|| this.course == "") && (this.component.match(this.letters)|| this.component == "")){
     console.log("valid inputs");
 
      //only subject
      if(this.course === "" && this.component === ""){
-      this.timeTableService.getResultOnlySubject(this.subject).subscribe(response=>this.result=response, error=> {
-       this.errorMessage=error.error
-       alert(this.errorMessage);
-      });
+      alert("Error! An input value for the course is required!");
 
     } 
     //only course code
