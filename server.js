@@ -122,7 +122,6 @@ var htmlString = req.body.schedule_name;
 var stripedHtml = htmlString.replace(/<[^>]+>/g, '');
 
 
-
 // validation 
 // always validate the input, never trust what the client inputs
 const { error } = validateSchedule(req.body); // object destructuring

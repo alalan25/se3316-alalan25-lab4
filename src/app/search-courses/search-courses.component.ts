@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableService } from 'src/app/time-table.service';
+import { Items } from './items';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { TimeTableService } from 'src/app/time-table.service';
 })
 export class SearchCoursesComponent implements OnInit {
 
+  //defining properties
   title = 'Look for Classes!';
   subject = ''; // this will be populated by user input 
   course = '';
@@ -115,9 +117,10 @@ export class SearchCoursesComponent implements OnInit {
     alert(this.errorMessage);
 
   });
-  
 
-   }
+   } 
+
+
 // creates a new array of object by getting the timetable entry for each subject_course pair
    displayTimetable(courseList){
      for(let x=0; x<courseList.length; x++){
