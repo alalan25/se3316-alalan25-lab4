@@ -10,7 +10,7 @@ export class ScheduleComponent implements OnInit {
 
   scheduleName = '';
   public errorMessage;
-  letters = /^[A-Za-z]+$/;
+ 
   
 
   constructor(private timeTableService: TimeTableService) { }
@@ -18,22 +18,15 @@ export class ScheduleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createSchedule(){
-    if(this.scheduleName.match(this.letters)){
-console.log("valid input");
+createSchedule(){
 this.timeTableService.createScheduleName(this.scheduleName).subscribe(response=>{
 console.log(response);
   },error => {
     this.errorMessage=error.error
     alert(this.errorMessage);
   });
-    }
-    else{
-      alert("Invalid input! Please input alphabets only!");
-    }
-   
-  }
-
+    
+}
  
 
 }

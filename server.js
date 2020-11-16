@@ -65,6 +65,7 @@ app.get('/api/timetable/:subjectcode', (req, res) => { //takes subjectcode as a 
 
 //getting timetable entry based on course code, subject code and optional course component
 app.get('/api/timetable/search/:subjectCode/:courseCode/:courseComponent', (req, res) => { //takes 3 parameters
+
     const afterSubjectCode = timetable_data.filter(s=> s.subject === req.params.subjectCode.toUpperCase()); // filters the array of objects based on the input subject code
     const afterCourseCode = afterSubjectCode.filter(s=> s.catalog_nbr.toString() === req.params.courseCode.toUpperCase()); //filters the filtered array based on the course code
     const afterCourseComponent = afterCourseCode.filter(s=> s.course_info[0].ssr_component === req.params.courseComponent.toUpperCase()); // filters the filtered array based on the component
@@ -77,6 +78,7 @@ app.get('/api/timetable/search/:subjectCode/:courseCode/:courseComponent', (req,
 });
 // getting entry based on just subject code and course code
 app.get('/api/timetable/search/subject/coursecode/:subjectCode/:courseCode', (req, res) => { //takes 3 parameters
+
     const afterSubjectCode = timetable_data.filter(s=> s.subject === req.params.subjectCode.toUpperCase()); // filters the array of objects based on the input subject code
     const afterCourseCode = afterSubjectCode.filter(s=> s.catalog_nbr.toString() === req.params.courseCode.toUpperCase()); //filters the filtered array based on the course code
     
@@ -115,6 +117,12 @@ app.get('/api/timetable/subject/:subjectCode', (req, res) => { //takes subjectco
 //POST for schedule
 app.post('/api/timetable/schedule', (req, res)=>{ // user provides the name of schedule 
 
+var htmlString = req.body.schedule_name;
+// removes the html tags
+var stripedHtml = htmlString.replace(/<[^>]+>/g, '');
+
+
+
 // validation 
 // always validate the input, never trust what the client inputs
 const { error } = validateSchedule(req.body); // object destructuring
@@ -127,7 +135,7 @@ const { error } = validateSchedule(req.body); // object destructuring
 
 const mySchedule = 
 {
-"schedule_name": req.body.schedule_name,
+"schedule_name":stripedHtml,
 "items":[]
 }
 
@@ -259,6 +267,8 @@ function validateSchedule (obj){
     return Joi.validate(obj, schema); // validate the request body with schema 
     
 }
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

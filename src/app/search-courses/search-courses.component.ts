@@ -71,7 +71,7 @@ export class SearchCoursesComponent implements OnInit {
 
      }
      else{
-      alert("Invalid input! Please input alphabets only!");
+      alert("Invalid input! Please input alphabets only! Numbers are only acceptable for course entry!");
      }
     
  
@@ -79,12 +79,13 @@ export class SearchCoursesComponent implements OnInit {
 
 
   addToSchedule(indexPar){
-    // if user tries to add a course to a schedule without creating a schedule 
+    
     this.indexCourse = indexPar; 
     
     this.timeTableService.getSchedules().subscribe(response=>{
       this.schedule = response;
       if(this.schedule.length == 0){
+        // if user tries to add a course to a schedule without creating a schedule 
         alert("No schedule has been created! Please create a schedule first to add courses!");
       }else{
         alert("Please select a schedule from the list in which you would like to add this course or create a new schedule");
