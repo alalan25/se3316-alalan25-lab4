@@ -14,6 +14,7 @@ let data = fs.readFileSync('data.json'); // reading the json file and storing co
 let timetable_data = JSON.parse(data); // parsing converts json into javascript object
 let schedule = [];
 
+app.use('/', express.static('static'));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // avoiding CORS error by giving access control to origin 

@@ -21,7 +21,7 @@ export class HttpRequestService {
    get(uri: string){
      // route structure 
      try{
-       return this.http.get(`${this.ROOT_URL}/${uri}`); 
+       return this.http.get(`/${uri}`); 
     }
     catch(error){
       this.errorHandler(error);
@@ -30,15 +30,15 @@ export class HttpRequestService {
    }
 
    post(uri: string, payload: Object){
-     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
+     return this.http.post(`/${uri}`, payload);
    }
 
    delete(uri: string){
-     return this.http.delete(`${this.ROOT_URL}/${uri}`);
+     return this.http.delete(`/${uri}`);
    }
 
    put(uri: string, body: Object){
-     return this.http.put(`${this.ROOT_URL}/${uri}`, body);
+     return this.http.put(`/${uri}`, body);
    }
    errorHandler(error: HttpErrorResponse){
   return Observable.throw(error.message || "Server Error");
